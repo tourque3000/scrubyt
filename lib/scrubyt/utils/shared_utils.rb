@@ -39,7 +39,9 @@ module Scrubyt
           results << node
           results.delete node.parent if node.is_a? Hpricot::Elem
         end
-        node.children.each { |child| traverse_for_match_inner.call(child, regexp) if (child.is_a? Hpricot::Elem) } if ! node.children.nil?
+	if node.children
+          node.children.each { |child| traverse_for_match_inner.call(child, regexp) if (child.is_a? Hpricot::Elem) } if ! node.children.nil?
+	end
       }
       traverse_for_match_inner.call(node,regexp)
       results
